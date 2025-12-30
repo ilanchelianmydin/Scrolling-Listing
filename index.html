@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Branch Opening Tracker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            color: #fff;
+        }
+
+        .header {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 20px 40px;
+            text-align: center;
+            border-bottom: 3px solid #00d9ff;
+            box-shadow: 0 4px 20px rgba(0, 217, 255, 0.3);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #00d9ff, #7b2ff7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header .subtitle {
+            font-size: 1em;
+            color: #ffffff;
+            font-weight: 700;
+            margin-top: 5px;
+            letter-spacing: 2px;
+        }
+
+        .scroll-container {
+            height: calc(100vh - 120px);
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        .scroll-content {
+            animation: scroll 45s linear infinite;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-50%);
+            }
+        }
+
+        .board-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 12px;
+        }
+
+        .board-table thead th {
+            background: rgba(0, 217, 255, 0.2);
+            padding: 18px;
+            text-align: left;
+            font-size: 1.1em;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            border: 2px solid rgba(0, 217, 255, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .board-table tbody tr {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        .board-table tbody tr:hover {
+            background: rgba(0, 217, 255, 0.15);
+            transform: scale(1.02);
+            box-shadow: 0 8px 30px rgba(0, 217, 255, 0.4);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .board-table tbody td {
+            padding: 20px;
+            font-size: 1.1em;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .board-table tbody td:first-child {
+            font-weight: 600;
+            font-size: 1.2em;
+            color: #00d9ff;
+            border-left: 4px solid #00d9ff;
+        }
+
+        .state-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .state-kelantan {
+            background: linear-gradient(135deg, #c2185b, #e91e63);
+            box-shadow: 0 4px 15px rgba(233, 30, 99, 0.4);
+        }
+
+        .state-selangor {
+            background: linear-gradient(135deg, #00796b, #26a69a);
+            box-shadow: 0 4px 15px rgba(38, 166, 154, 0.4);
+        }
+
+        .state-pahang {
+            background: linear-gradient(135deg, #558b2f, #7cb342);
+            box-shadow: 0 4px 15px rgba(124, 179, 66, 0.4);
+        }
+
+        .state-terengganu {
+            background: linear-gradient(135deg, #f57c00, #ff9800);
+            box-shadow: 0 4px 15px rgba(255, 152, 0, 0.4);
+        }
+
+        .date-cell {
+            font-weight: 600;
+            font-size: 1.15em;
+        }
+
+        .date-q1 {
+            color: #4fc3f7;
+            text-shadow: 0 0 10px rgba(79, 195, 247, 0.5);
+        }
+
+        .date-q2 {
+            color: #81c784;
+            text-shadow: 0 0 10px rgba(129, 199, 132, 0.5);
+        }
+
+        .date-q3 {
+            color: #ffb74d;
+            text-shadow: 0 0 10px rgba(255, 183, 77, 0.5);
+        }
+
+        .date-q4 {
+            color: #e57373;
+            text-shadow: 0 0 10px rgba(229, 115, 115, 0.5);
+        }
+
+        .date-2027 {
+            color: #ba68c8;
+            text-shadow: 0 0 10px rgba(186, 104, 200, 0.5);
+        }
+
+        .scroll-content {
+            animation-play-state: running;
+        }
+
+        .scroll-container:hover .scroll-content {
+            animation-play-state: paused;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🏢 BRANCH OPENING</h1>
+        <div class="subtitle">RETAIL EXPANSION PIPELINE</div>
+    </div>
+
+    <div class="scroll-container">
+        <div class="scroll-content">
+            <table class="board-table">
+                <thead>
+                    <tr>
+                        <th>Project Title</th>
+                        <th>State</th>
+                        <th>Target Opening Date</th>
+                    </tr>
+                </thead>
+                <tbody id="branchData"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        const branches = [
+            { project: "PASIR MAS", state: "KELANTAN", date: "08/01/2026" },
+            { project: "PXR JABI (PMX)", state: "TERENGGANU", date: "26/02/2026" },
+            { project: "JELAWAT - SETIA SHOP", state: "KELANTAN", date: "01/03/2026" },
+            { project: "BALUK - KUANTAN", state: "PAHANG", date: "01/04/2026" },
+            { project: "SUTERA, KAJANG", state: "SELANGOR", date: "01/04/2026" },
+            { project: "BANDAR TASIK PUTERI, RAWANG", state: "SELANGOR", date: "01/04/2026" },
+            { project: "NADI, SEMENYIH", state: "SELANGOR", date: "01/04/2026" },
+            { project: "SERENA SQUARE, SEMENYIH", state: "SELANGOR", date: "01/04/2026" },
+            { project: "BUKIT BUNGA JELI", state: "KELANTAN", date: "01/05/2026" },
+            { project: "SENTOSA SQUARE, RAWANG", state: "SELANGOR", date: "01/05/2026" },
+            { project: "SAUJANA PERDANA, SUNGAI BULOH", state: "SELANGOR", date: "01/05/2026" },
+            { project: "PLATINUM MALL", state: "KELANTAN", date: "01/06/2026" },
+            { project: "GUA MUSANG (OLD TOWN)", state: "KELANTAN", date: "01/06/2026" },
+            { project: "BANDAR SERINA CITY, DENGKIL", state: "SELANGOR", date: "01/06/2026" },
+            { project: "KUALA KRAI", state: "KELANTAN", date: "01/07/2026" },
+            { project: "KESUMA SQUARE, SEMENYIH", state: "SELANGOR", date: "01/07/2026" },
+            { project: "DUNGUN (ANZ)", state: "TERENGGANU", date: "01/09/2026" },
+            { project: "TAMAT LANGAT UTAMA, BUKIT CHANGGANG, BANTING", state: "SELANGOR", date: "01/11/2026" },
+            { project: "KOK LANAS", state: "KELANTAN", date: "29/12/2026" },
+            { project: "TANAH MERAH", state: "KELANTAN", date: "31/12/2026" },
+            { project: "SUNGAI SOI, KUANTAN", state: "PAHANG", date: "01/01/2027" },
+            { project: "CYBERJAYA", state: "SELANGOR", date: "31/01/2027" },
+            { project: "KEMPADANG BAY - KUANTAN", state: "PAHANG", date: "01/02/2027" }
+        ];
+
+        // Duplicate data for seamless loop
+        const duplicatedBranches = [...branches, ...branches];
+
+        function getStateClass(state) {
+            const stateMap = {
+                'KELANTAN': 'state-kelantan',
+                'SELANGOR': 'state-selangor',
+                'PAHANG': 'state-pahang',
+                'TERENGGANU': 'state-terengganu'
+            };
+            return stateMap[state] || 'state-kelantan';
+        }
+
+        function getDateClass(dateStr) {
+            const [day, month, year] = dateStr.split('/');
+            const monthNum = parseInt(month);
+            
+            if (year === '2027') return 'date-2027';
+            if (monthNum >= 1 && monthNum <= 3) return 'date-q1';
+            if (monthNum >= 4 && monthNum <= 6) return 'date-q2';
+            if (monthNum >= 7 && monthNum <= 9) return 'date-q3';
+            return 'date-q4';
+        }
+
+        function renderBranches() {
+            const tbody = document.getElementById('branchData');
+            tbody.innerHTML = duplicatedBranches.map((branch, index) => `
+                <tr style="animation-delay: ${index * 0.05}s">
+                    <td>${branch.project}</td>
+                    <td><span class="state-badge ${getStateClass(branch.state)}">${branch.state}</span></td>
+                    <td class="date-cell ${getDateClass(branch.date)}">${branch.date}</td>
+                </tr>
+            `).join('');
+        }
+
+        renderBranches();
+    </script>
+</body>
+</html>
