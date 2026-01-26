@@ -157,28 +157,59 @@
         }
 
         .date-q1 {
-            color: #4fc3f7;
-            text-shadow: 0 0 10px rgba(79, 195, 247, 0.5);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: blink-red-yellow 1s ease-in-out infinite;
+        }
+
+        @keyframes blink-red-yellow {
+            0%, 100% { 
+                background: linear-gradient(135deg, #ff0000, #ff4444);
+                color: #fff;
+                box-shadow: 0 4px 20px rgba(255, 0, 0, 0.7);
+            }
+            50% { 
+                background: linear-gradient(135deg, #ffa500, #ffcc00);
+                color: #000;
+                box-shadow: 0 4px 20px rgba(255, 165, 0, 0.7);
+            }
         }
 
         .date-q2 {
-            color: #81c784;
-            text-shadow: 0 0 10px rgba(129, 199, 132, 0.5);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: blink-yellow-red 1s ease-in-out infinite;
+        }
+
+        @keyframes blink-yellow-red {
+            0%, 100% { 
+                background: linear-gradient(135deg, #ffa500, #ffcc00);
+                color: #000;
+                box-shadow: 0 4px 20px rgba(255, 165, 0, 0.7);
+            }
+            50% { 
+                background: linear-gradient(135deg, #ff0000, #ff4444);
+                color: #fff;
+                box-shadow: 0 4px 20px rgba(255, 0, 0, 0.7);
+            }
         }
 
         .date-q3 {
-            color: #ffb74d;
-            text-shadow: 0 0 10px rgba(255, 183, 77, 0.5);
+            display: none;
         }
 
         .date-q4 {
-            color: #e57373;
-            text-shadow: 0 0 10px rgba(229, 115, 115, 0.5);
+            display: none;
         }
 
         .date-2027 {
-            color: #ba68c8;
-            text-shadow: 0 0 10px rgba(186, 104, 200, 0.5);
+            display: none;
         }
 
         .scroll-content {
@@ -213,29 +244,28 @@
 
     <script>
         const branches = [
-            { project: "PASIR MAS", state: "KELANTAN", date: "08/01/2026" },
-            { project: "PXR JABI (PMX)", state: "TERENGGANU", date: "26/02/2026" },
-            { project: "JELAWAT - SETIA SHOP", state: "KELANTAN", date: "01/03/2026" },
-            { project: "BALUK - KUANTAN", state: "PAHANG", date: "01/04/2026" },
-            { project: "SUTERA, KAJANG", state: "SELANGOR", date: "01/04/2026" },
-            { project: "BANDAR TASIK PUTERI, RAWANG", state: "SELANGOR", date: "01/04/2026" },
-            { project: "NADI, SEMENYIH", state: "SELANGOR", date: "01/04/2026" },
-            { project: "SERENA SQUARE, SEMENYIH", state: "SELANGOR", date: "01/04/2026" },
-            { project: "BUKIT BUNGA JELI", state: "KELANTAN", date: "01/05/2026" },
-            { project: "SENTOSA SQUARE, RAWANG", state: "SELANGOR", date: "01/05/2026" },
-            { project: "SAUJANA PERDANA, SUNGAI BULOH", state: "SELANGOR", date: "01/05/2026" },
-            { project: "PLATINUM MALL", state: "KELANTAN", date: "01/06/2026" },
-            { project: "GUA MUSANG (OLD TOWN)", state: "KELANTAN", date: "01/06/2026" },
-            { project: "BANDAR SERINA CITY, DENGKIL", state: "SELANGOR", date: "01/06/2026" },
-            { project: "KUALA KRAI", state: "KELANTAN", date: "01/07/2026" },
-            { project: "KESUMA SQUARE, SEMENYIH", state: "SELANGOR", date: "01/07/2026" },
-            { project: "DUNGUN (ANZ)", state: "TERENGGANU", date: "01/09/2026" },
-            { project: "TAMAT LANGAT UTAMA, BUKIT CHANGGANG, BANTING", state: "SELANGOR", date: "01/11/2026" },
-            { project: "KOK LANAS", state: "KELANTAN", date: "29/12/2026" },
-            { project: "TANAH MERAH", state: "KELANTAN", date: "31/12/2026" },
-            { project: "SUNGAI SOI, KUANTAN", state: "PAHANG", date: "01/01/2027" },
-            { project: "CYBERJAYA", state: "SELANGOR", date: "31/01/2027" },
-            { project: "KEMPADANG BAY - KUANTAN", state: "PAHANG", date: "01/02/2027" }
+            { project: "PXR JABI (PMX)", state: "TERENGGANU", date: "COMING SOON", alert: "yellow" },
+            { project: "JELAWAT - SETIA SHOP", state: "KELANTAN", date: "COMING SOON", alert: "red" },
+            { project: "BALUK - KUANTAN", state: "PAHANG", date: "COMING SOON", alert: "yellow" },
+            { project: "SUTERA, KAJANG", state: "SELANGOR", date: "COMING SOON", alert: "red" },
+            { project: "BANDAR TASIK PUTERI, RAWANG", state: "SELANGOR", date: "COMING SOON", alert: "yellow" },
+            { project: "NADI, SEMENYIH", state: "SELANGOR", date: "COMING SOON", alert: "red" },
+            { project: "SERENA SQUARE, SEMENYIH", state: "SELANGOR", date: "COMING SOON", alert: "yellow" },
+            { project: "BUKIT BUNGA JELI", state: "KELANTAN", date: "COMING SOON", alert: "red" },
+            { project: "SENTOSA SQUARE, RAWANG", state: "SELANGOR", date: "COMING SOON", alert: "yellow" },
+            { project: "SAUJANA PERDANA, SUNGAI BULOH", state: "SELANGOR", date: "COMING SOON", alert: "red" },
+            { project: "PLATINUM MALL", state: "KELANTAN", date: "COMING SOON", alert: "yellow" },
+            { project: "GUA MUSANG (OLD TOWN)", state: "KELANTAN", date: "COMING SOON", alert: "red" },
+            { project: "BANDAR SERINA CITY, DENGKIL", state: "SELANGOR", date: "COMING SOON", alert: "yellow" },
+            { project: "KUALA KRAI", state: "KELANTAN", date: "COMING SOON", alert: "red" },
+            { project: "KESUMA SQUARE, SEMENYIH", state: "SELANGOR", date: "COMING SOON", alert: "yellow" },
+            { project: "DUNGUN (ANZ)", state: "TERENGGANU", date: "COMING SOON", alert: "red" },
+            { project: "TAMAT LANGAT UTAMA, BUKIT CHANGGANG, BANTING", state: "SELANGOR", date: "COMING SOON", alert: "yellow" },
+            { project: "KOK LANAS", state: "KELANTAN", date: "COMING SOON", alert: "red" },
+            { project: "TANAH MERAH", state: "KELANTAN", date: "COMING SOON", alert: "yellow" },
+            { project: "SUNGAI SOI, KUANTAN", state: "PAHANG", date: "COMING SOON", alert: "red" },
+            { project: "CYBERJAYA", state: "SELANGOR", date: "COMING SOON", alert: "yellow" },
+            { project: "KEMPADANG BAY - KUANTAN", state: "PAHANG", date: "COMING SOON", alert: "red" }
         ];
 
         // Duplicate data for seamless loop
@@ -251,15 +281,8 @@
             return stateMap[state] || 'state-kelantan';
         }
 
-        function getDateClass(dateStr) {
-            const [day, month, year] = dateStr.split('/');
-            const monthNum = parseInt(month);
-            
-            if (year === '2027') return 'date-2027';
-            if (monthNum >= 1 && monthNum <= 3) return 'date-q1';
-            if (monthNum >= 4 && monthNum <= 6) return 'date-q2';
-            if (monthNum >= 7 && monthNum <= 9) return 'date-q3';
-            return 'date-q4';
+        function getDateClass(branch) {
+            return branch.alert === 'red' ? 'date-q1' : 'date-q2';
         }
 
         function renderBranches() {
@@ -268,7 +291,7 @@
                 <tr style="animation-delay: ${index * 0.05}s">
                     <td>${branch.project}</td>
                     <td><span class="state-badge ${getStateClass(branch.state)}">${branch.state}</span></td>
-                    <td class="date-cell ${getDateClass(branch.date)}">${branch.date}</td>
+                    <td class="date-cell ${getDateClass(branch)}">${branch.date}</td>
                 </tr>
             `).join('');
         }
